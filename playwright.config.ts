@@ -1,12 +1,5 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
-import { config as dotenvConfig } from 'dotenv';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-dotenvConfig({ path: 'e2e/config/.env' });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -29,7 +22,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'list',
+  reporter: 'html',
   /* This runs once at the start of the tests */
   globalSetup: './e2e/config/global-setup.ts',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -37,12 +30,8 @@ const config: PlaywrightTestConfig = {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
 
-    /* Base URL to use in actions like `await page.goto('/')`. Overridden in ci */
-    baseURL: process.env.BASE_URL ?? 'http://localhost:8080',
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    storageState: 'e2e/config/state.json',
   },
 
   /* Configure projects for major browsers */
