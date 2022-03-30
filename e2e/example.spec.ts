@@ -1,5 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('should pass', () => {
-  expect(true).toBe(true)
+import { TRYME } from "./constants.js";
+
+test("should pass", () => {
+  expect(true).toBe(true);
+  console.log(TRYME);
 });
